@@ -42,17 +42,17 @@ public class Pets
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public ColorType ColorType { get; set; }
 
-    [Required]
-    public PetOwner PetOwner { get; set; }
-    [Required]
-    public int OwnedById { get; set; }
+    [ForeignKey("PetOwners")]
+        public int PetOwnerid { get; set; }
+        
+        public PetOwner PetOwner { get; set; }
 
 
 
     public DateTime? CheckInDate { get; set; }
     
     public bool CheckedIn { get; set; }
-    public void PewhitCheckIn()
+    public void PetCheckIn()
     {
         CheckedIn = true;
        //maybe? CheckedIn = DateTime.Now
