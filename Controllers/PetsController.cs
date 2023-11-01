@@ -64,4 +64,37 @@ public class PetsController : ControllerBase
 
         return NoContent();
     }
+
+    [HttpPut("pet/{PetId}")]
+    public IActionResult CheckIn(int PetId)
+    {
+        Pets Pet = _c.Pets.Find(PetId);
+
+        if (Pet is null)
+        {
+            return NotFound();
+        }
+        Pet.PetCheckIn();
+
+        _c.Pets.Update(Pet);
+        _c.SaveChanges();
+
+        return NoContent();
+    }
+     [HttpPut("pet/{PetId}")]
+    public IActionResult CheckOut(int PetId)
+    {
+        Pets Pet = _c.Pets.Find(PetId);
+
+        if (Pet is null)
+        {
+            return NotFound();
+        }
+        Pet.PetCheckOut();
+
+        _c.Pets.Update(Pet);
+        _c.SaveChanges();
+
+        return NoContent();
+    }
 }

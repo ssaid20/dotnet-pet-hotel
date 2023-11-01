@@ -54,16 +54,17 @@ public class Pets
     public bool CheckedIn { get; set; }
     public void PetCheckIn()
     {
-        CheckedIn = true;
-       //maybe? CheckedIn = DateTime.Now
+        // CheckedIn = true;
+        CheckInDate = DateTime.Now;
+
        Console.WriteLine($"{Name} has been checked IN.");
         
     }
 
     public void PetCheckOut()
     {
-        CheckedIn = false;
-        //maybe? checkedIn = null;
+        CheckInDate = null;
+     
         Console.WriteLine($"{Name} has been checked OUT.");
     }
 }

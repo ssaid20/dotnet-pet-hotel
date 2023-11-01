@@ -29,6 +29,14 @@ namespace pet_hotel.Controllers
             return _c.PetOwners.Include(owner => owner.Pets).FirstOrDefault(owner => owner.Id == id);
         }
 
+        [HttpPost]
+        public IActionResult addPetOwner([FromBody] PetOwner owner)
+        {
+            _c.PetOwners.Add(owner);
+            _c.SaveChanges();
+            return CreatedAtAction(nameof(GetPetOwnerById), new { id = owner.Id }, owner);
+        }
+
         
 
     }
