@@ -203,6 +203,7 @@ class PetsTable extends Component {
             </option>
             <option value="Black">Black</option>
             <option value="White">White</option>
+            <option value="Brown">Brown</option>
             <option value="Golden">Golden</option>
             <option value="Tricolor">Tricolor</option>
             <option value="Spotted">Spotted</option>
