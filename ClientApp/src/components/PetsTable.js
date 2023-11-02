@@ -13,6 +13,7 @@ class PetsTable extends Component {
       petBreed: "",
       petColor: "",
       petOwnerId: "",
+      imageUrl: "",
     },
   };
 
@@ -29,6 +30,7 @@ class PetsTable extends Component {
         >
           <thead>
             <tr>
+              <th>Picture</th>
               <th>Name</th>
               <th>Breed</th>
               <th>Color</th>
@@ -47,6 +49,14 @@ class PetsTable extends Component {
             )}
             {this.props.pets.map((pet) => (
               <tr key={`pet-row-${pet.id}`}>
+                <td>
+                  <img
+                    src={pet.imageUrl}
+                    alt={pet.name}
+                    width="50"
+                    height="50"
+                  />
+                </td>
                 <td>{pet.name}</td>
                 <td>{pet.petBreed}</td>
                 <td>{pet.petColor}</td>
@@ -158,6 +168,16 @@ class PetsTable extends Component {
         <h2 id="tableLabel">Pets</h2>
         {this.renderMessages()}
         <div className="form-group row ml-0 mr-0">
+          <input
+            placeholder={"Pet Image URL"}
+            className={"form-control col-md-2 mr-2"}
+            value={this.state.newPet.imageUrl}
+            onChange={(e) =>
+              this.setState({
+                newPet: { ...this.state.newPet, imageUrl: e.target.value },
+              })
+            }
+          />
           <input
             placeholder={"pet name"}
             className={"form-control col-md-2 mr-2"}

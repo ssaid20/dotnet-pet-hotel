@@ -5,6 +5,7 @@ import axios from "axios";
 import { connect } from "react-redux";
 import { Container } from "reactstrap";
 import { NavMenu } from "./NavMenu";
+import Transaction from "./Transactions";
 
 class Home extends Component {
   static displayName = Home.name;
@@ -24,6 +25,7 @@ class Home extends Component {
           <PetsTable fetchPetOwners={this.fetchPetOwners} />
           <br />
           <PetOwnersTable fetchPetOwners={this.fetchPetOwners} />
+          <Transaction />
         </Container>
       </>
     );
