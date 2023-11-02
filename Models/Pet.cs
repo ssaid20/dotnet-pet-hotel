@@ -50,13 +50,17 @@ public class Pets
         public PetOwner PetOwner { get; set; }
 
 
-    
+    public Pets()
+    {
+        CheckedInAt = DateTime.MinValue;
+    }
+
     public DateTime? CheckedInAt { get; set; }
     
     public void PetCheckIn()
     {
 
-        this.CheckedInAt = DateTime.Now;
+        CheckedInAt = DateTime.Now;
 
        Console.WriteLine($"{Name} has been checked IN.");
     }
@@ -64,7 +68,7 @@ public class Pets
     public void PetCheckOut()
     {
 
-         this.CheckedInAt = DateTime.MinValue;
+         CheckedInAt = DateTime.MinValue;
        
      
         Console.WriteLine($"{Name} has been checked OUT.");
