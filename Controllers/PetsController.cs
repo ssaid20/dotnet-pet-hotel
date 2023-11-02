@@ -43,6 +43,7 @@ public class PetsController : ControllerBase
         {
             return NotFound();
         }
+
         _c.Pets.Add(Pet);
         _c.SaveChanges();
 
@@ -58,14 +59,14 @@ public class PetsController : ControllerBase
         {
             return NotFound();
         }
-
+        
         _c.Pets.Remove(Pet);
         _c.SaveChanges();
 
         return NoContent();
     }
 
-    [HttpPut("pet/{PetId}")]
+    [HttpPut("{PetId}/checkin")]
     public IActionResult CheckIn(int PetId)
     {
         Pets Pet = _c.Pets.Find(PetId);
@@ -81,20 +82,21 @@ public class PetsController : ControllerBase
 
         return NoContent();
     }
-     [HttpPut("pet/{PetId}")]
+     [HttpPut("{PetId}/checkout")]
     public IActionResult CheckOut(int PetId)
     {
-        Pets Pet = _c.Pets.Find(PetId);
-
-        if (Pet is null)
+        Pets pet = _c.Pets.Find(PetId);
+       
+        if (pet is null)
         {
             return NotFound();
         }
-        Pet.PetCheckOut();
+        pet.PetCheckOut();
 
-        _c.Pets.Update(Pet);
+        _c.Pets.Update(pet);
         _c.SaveChanges();
 
         return NoContent();
     }
+    
 }

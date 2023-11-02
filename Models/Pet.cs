@@ -1,11 +1,13 @@
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
+using System;
+using System.Collections.Generic;
 
 namespace pet_hotel.Models
-{ 
+{
 
-public enum PetBreed
+    public enum PetBreed
 {
     Shepard,
     Poodle,
@@ -48,22 +50,22 @@ public class Pets
         public PetOwner PetOwner { get; set; }
 
 
-
-    public DateTime? CheckInDate { get; set; }
     
-    public bool CheckedIn { get; set; }
+    public DateTime? CheckedInAt { get; set; }
+    
     public void PetCheckIn()
     {
-        // CheckedIn = true;
-        CheckInDate = DateTime.Now;
+
+        this.CheckedInAt = DateTime.Now;
 
        Console.WriteLine($"{Name} has been checked IN.");
-        
     }
 
     public void PetCheckOut()
     {
-        CheckInDate = null;
+
+         this.CheckedInAt = DateTime.MinValue;
+       
      
         Console.WriteLine($"{Name} has been checked OUT.");
     }
