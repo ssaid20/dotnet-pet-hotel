@@ -65,8 +65,8 @@ A recommended approach would be to start with PetOwners, since they're the simpl
 - Add the ability to edit pet owners' name, email address
 - Add pagination to one (or all) of the resources. You can do this with optional parameters: `/api/petowners/?start=0&limit=10`, next page: `/api/petowners/?start=10&limit=10` etc. `Transaction` would benefit greatly from this.
 - Move alerts up to global redux state and share alert state between the tables
-- Move alerts to be 'toasts': they show up in the corner and auto-dismiss themselves after 5 seconds.
-- Prevent the PetOwner from being deleted if they have any pets that are checked in.
+|x| Move alerts to be 'toasts': they show up in the corner and auto-dismiss themselves after 5 seconds.
+|x| Prevent the PetOwner from being deleted if they have any pets that are checked in.
 - If a pet is deleted and their owner no longer has any pets in the hotel, delete the owner too.
 - Add a 'Are you sure?' prompt to the delete buttons on the client app.
 - Add additional tests to test for proper validation errors.

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class PetOwnersTable extends Component {
   state = {
@@ -50,7 +52,9 @@ class PetOwnersTable extends Component {
 
   renderTable = () => {
     return (
+      
       <div className="table-responsive">
+        <ToastContainer />
         <table
           className="table table-striped table-bordered table-hover"
           aria-labelledby="tabelLabel"
@@ -146,14 +150,28 @@ class PetOwnersTable extends Component {
     );
   }
 
+
   deletePetOwner = async (id) => {
-    await axios.delete(`api/petOwners/${id}`);
-    this.props.fetchPetOwners();
-    this.setState({
-      errors: [],
-      successMessage: "Deleted petOwner successfully",
-    });
-  };
+    // First, find the pet owner by id from the props
+    const petOwner = this.props.petOwners.find(po => po.id === id);
+    
+    // If the petOwner has a petCount greater than zero, prevent deletion
+    if (petOwner && petOwner.petCount > 0) {
+        toast.error("Cannot delete a pet owner with checked-in pets!");
+        return;
+    }
+
+    try {
+        await axios.delete(`api/petOwners/${id}`);
+        this.props.fetchPetOwners();
+        toast.success("Deleted pet owner successfully");
+    } catch (error) {
+        toast.error("Error deleting the pet owner!");
+    }
+};
+
+
+
 
   submitPetOwner = async () => {
     try {
@@ -161,10 +179,11 @@ class PetOwnersTable extends Component {
       await axios.post("api/petOwners", this.state.newPetOwner);
       this.setState({ newPetOwner: { ...this.state.newPetOwner, name: "" } });
       this.props.fetchPetOwners();
-      this.setState({
-        errors: [],
-        successMessage: "Successfully added pet Owner",
-      });
+      toast.success("Successfully added Pet Owner");
+      // this.setState({
+      //   errors: [],
+      //   successMessage: "Successfully added pet Owner",
+      // });
     } catch (err) {
       if (err.response.status === 400) {
         // validation errors

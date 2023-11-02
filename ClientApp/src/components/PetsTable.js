@@ -288,10 +288,11 @@ class PetsTable extends Component {
   checkIn = async (id) => {
     try {
       await axios.put(`api/pets/${id}/checkin`);
-      this.setState({
-        errors: [],
-        successMessage: "Successfully checked in!",
-      });
+      toast.success("Successfully checkin in!")
+      // this.setState({
+      //   errors: [],
+      //   successMessage: "Successfully checked in!",
+      // });
       this.fetchData();
     } catch (err) {
       this.setState({ errors: { error: [err.message] }, successMessage: null });
@@ -301,10 +302,11 @@ class PetsTable extends Component {
   checkOut = async (id) => {
     try {
       await axios.put(`api/pets/${id}/checkout`);
-      this.setState({
-        errors: [],
-        successMessage: "Successfully checked out!",
-      });
+      toast.success("Successfully checked out!")
+      // this.setState({
+      //   errors: [],
+      //   successMessage: "Successfully checked out!",
+      // });
       this.fetchData();
     } catch (err) {
       this.setState({ errors: { error: [err.message] }, successMessage: null });
