@@ -50,6 +50,17 @@ namespace pet_hotel.Controllers
             return NoContent();
         }
         
+        [HttpPut("{PetId}")]
+        public IActionResult UpdatePetOwnerById(int PetId, [FromBody] PetOwner PetOwner)
+        {
+            if(!_c.PetOwners.Any(p => p.Id == PetId)) return NotFound();
+            _c.Update(PetOwner);
+            _c.SaveChanges();
+            return Ok(_c.PetOwners.Include(p => p.Pets).SingleOrDefault(p => p.Id == PetId));
+        }
+
+       
+        
 
     }
 

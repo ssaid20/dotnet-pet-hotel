@@ -14,6 +14,7 @@ public class PetsController : ControllerBase
         _c = c;
     }
 
+//Get all pets
     [HttpGet]
     public ActionResult GetPets()
     {
@@ -22,6 +23,7 @@ public class PetsController : ControllerBase
         return Ok(Pets);
     }
 
+//get one pets by id
     [HttpGet("{PetId}")]
     public IActionResult GetPetById(int PetId)
     {
@@ -34,6 +36,7 @@ public class PetsController : ControllerBase
         return Ok(pet);
     }
 
+//Add a pet
     [HttpPost]
     public ActionResult AddPet(Pets Pet)
     {
@@ -50,6 +53,7 @@ public class PetsController : ControllerBase
         return CreatedAtAction(nameof(GetPetById), new { Id = Pet.Id }, Pet);
     }
 
+//Delete pet
     [HttpDelete("{PetId}")]
     public IActionResult DeletePet(int PetId)
     {
@@ -66,12 +70,13 @@ public class PetsController : ControllerBase
         return NoContent();
     }
 
+// Put to checkin a pet
     [HttpPut("{PetId}/checkin")]
     public IActionResult CheckIn(int PetId)
     {
         Pets Pet = _c.Pets.Find(PetId);
 
-        if (Pet is null)
+        if (Pet == null)
         {
             return NotFound();
         }
@@ -80,14 +85,16 @@ public class PetsController : ControllerBase
         _c.Pets.Update(Pet);
         _c.SaveChanges();
 
-        return NoContent();
+        return Ok(Pet);
     }
+
+    //Put to checkout a pet
      [HttpPut("{PetId}/checkout")]
     public IActionResult CheckOut(int PetId)
     {
         Pets pet = _c.Pets.Find(PetId);
        
-        if (pet is null)
+        if (pet == null)
         {
             return NotFound();
         }
@@ -96,7 +103,17 @@ public class PetsController : ControllerBase
         _c.Pets.Update(pet);
         _c.SaveChanges();
 
-        return NoContent();
+        return Ok(pet);
     }
+
+    [HttpPut("{PetId}")]
+    public IActionResult UpdatePet(int PetId, [FromBody] Pets Pet)
+    {
+        if (!_c.Pets.Any(p => p.Id == PetId)) return NotFound();
+        _c.Update(Pet);
+        _c.SaveChanges();
+        return Ok(_c.Pets.Include(p => p.PetOwner).SingleOrDefault(p => p.Id == PetId));
+    }
+
     
 }
