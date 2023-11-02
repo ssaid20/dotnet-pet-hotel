@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import moment from "moment";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 class PetsTable extends Component {
   state = {
@@ -13,6 +16,7 @@ class PetsTable extends Component {
       petBreed: "",
       petColor: "",
       petOwnerId: "",
+      imageUrl: "",
     },
   };
 
@@ -29,7 +33,8 @@ class PetsTable extends Component {
         >
           <thead>
             <tr>
-              <th>Name</th>
+        <th>Picture</th>
+            <th>Name</th>
               <th>Breed</th>
               <th>Color</th>
               <th>Checked In</th>
@@ -47,6 +52,14 @@ class PetsTable extends Component {
             )}
             {this.props.pets.map((pet) => (
               <tr key={`pet-row-${pet.id}`}>
+                <td>
+                  <img
+                    src={pet.imageUrl}
+                    alt={pet.name}
+                    width="50"
+                    height="50"
+                  />
+                </td>
                 <td>{pet.name}</td>
                 <td>{pet.petBreed}</td>
                 <td>{pet.petColor}</td>
@@ -91,20 +104,25 @@ class PetsTable extends Component {
     try {
       await axios.post("api/pets/", this.state.newPet);
       this.fetchData();
-      this.setState({
-        errors: [],
-        successMessage: "Successfully added pet!",
-      });
+      toast.success("Successfully added pet!");
+      // this.setState({
+      //   errors: [],
+      //   successMessage: "Successfully added pet!",
+      // });
     } catch (err) {
       console.log(err);
-      if (err.response.status === 400) {
-        // validation errors
-        this.setState({
-          errors: err.response.data.errors,
-          successMessage: null,
-        });
+        if (err.response.status === 400) {
+         //validation errors
+         
+         toast.error(err.message);
+        // this.setState({
+        //   errors: err.response.data.errors,
+        //  successMessage: null,
+        // });
+        };
+        
       }
-    }
+    
   };
 
   renderMessages = () => {
@@ -155,9 +173,20 @@ class PetsTable extends Component {
 
     return (
       <>
+      <ToastContainer />
         <h2 id="tableLabel">Pets</h2>
         {this.renderMessages()}
         <div className="form-group row ml-0 mr-0">
+          <input
+            placeholder={"Pet Image URL"}
+            className={"form-control col-md-2 mr-2"}
+            value={this.state.newPet.imageUrl}
+            onChange={(e) =>
+              this.setState({
+                newPet: { ...this.state.newPet, imageUrl: e.target.value },
+              })
+            }
+          />
           <input
             placeholder={"pet name"}
             className={"form-control col-md-2 mr-2"}
@@ -246,10 +275,11 @@ class PetsTable extends Component {
     try {
       await axios.delete(`api/pets/${id}`);
       this.fetchData();
-      this.setState({
-        errors: [],
-        successMessage: `Successfully removed pet`,
-      });
+      toast.success("Successfully Deleted Pet!");
+      // this.setState({
+      //   errors: [],
+      //   successMessage: `Successfully removed pet`,
+      // });
     } catch (err) {
       this.setState({ errors: { error: [err.message] }, successMessage: null });
     }
