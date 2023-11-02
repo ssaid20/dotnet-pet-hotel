@@ -22,10 +22,18 @@ export const petsReducer = (state = [], action) => {
   return state;
 };
 
+export const transactions = (state = [], action) => {
+  if (action.type === 'SET_TRANSACTIONS') {
+    return action.payload;
+  }
+  return state;
+}
+
 const reduxStore = createStore(
   combineReducers({
     petOwners: petOwnersReducer,
     pets: petsReducer,
+    transactions: transactions,
   })
 );
 window.store = reduxStore;
