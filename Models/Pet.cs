@@ -60,7 +60,7 @@ public class Pets
     public void PetCheckIn()
     {
 
-        CheckedInAt = DateTime.Now;
+        CheckedInAt = DateTime.UtcNow;
 
        Console.WriteLine($"{Name} has been checked IN.");
     }
