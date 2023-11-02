@@ -11,7 +11,7 @@ a {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 body {
-  background-color: #788a9d;
+  background-color: rgb(186, 35, 133);
 }
 code {
   color: #e01a76;
@@ -21,4 +21,8 @@ code {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
+}
+.btn-primary:hover{
+  background-color: #5b99d8;
+  color: black;
 }

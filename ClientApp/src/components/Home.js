@@ -12,6 +12,7 @@ class Home extends Component {
   fetchPetOwners = async () => {
     const response = await axios.get("api/petOwners");
     this.props.dispatch({ type: "SET_PETOWNERS", payload: response.data });
+    console.log("Hello world, and Hello Joe");
   };
 
   render() {
