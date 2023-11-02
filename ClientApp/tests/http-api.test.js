@@ -63,6 +63,7 @@ test("Create a new pet via HTTP POST", async () => {
   // nothing to do yet
   const newPet = {
     name: "Fido 1",
+    imageUrl: "https://yourdost-blog-images.s3-ap-southeast-1.amazonaws.com/wp-content/uploads/2016/01/03165939/Dogs.jpg",
     petBreed: "Retriever",
     petColor: "Golden",
     petOwnerId: petOwner.id,
