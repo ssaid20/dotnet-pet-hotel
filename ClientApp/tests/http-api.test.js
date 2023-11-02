@@ -86,6 +86,7 @@ test("Create a new pet via HTTP POST", async () => {
 
 test("Update the pet via HTTP PUT", async () => {
   const newName = "Fido II";
+  const newImageUrl = "http://example.com/fido2.jpg";
   const newPet = { ...pet, name: newName, color: "Black" };
   const response = await axios.put(`${SERVER_URL}/api/pets/${pet.id}`, newPet);
   expect(response.status).toBe(200);
