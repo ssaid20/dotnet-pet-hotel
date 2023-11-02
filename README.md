@@ -59,7 +59,7 @@ A recommended approach would be to start with PetOwners, since they're the simpl
   - Create the controller
   - Create the relevant jest tests
   - Show all recent transactions in the react app.
-- Add a profile image to your pets (via internet URL) or a drop-down of available URLs. You'll need to add the field and migration for the new field. Consider Updating the tests to check that images make it!
+|x| Add a profile image to your pets (via internet URL) or a drop-down of available URLs. You'll need to add the field and migration for the new field. Consider Updating the tests to check that images make it!
 - Use the model validations returned from the server to highlight which fields have the validation error. Hint: The error coming back will often contain the field name, which will match the name of the element on the form. See sourdough bakery for examples (the React App already has plumbing for default validation message format).
 - Add the ability to edit pet names
 - Add the ability to edit pet owners' name, email address
@@ -67,8 +67,8 @@ A recommended approach would be to start with PetOwners, since they're the simpl
 - Move alerts up to global redux state and share alert state between the tables
 |x| Move alerts to be 'toasts': they show up in the corner and auto-dismiss themselves after 5 seconds.
 |x| Prevent the PetOwner from being deleted if they have any pets that are checked in.
-- If a pet is deleted and their owner no longer has any pets in the hotel, delete the owner too.
-- Add a 'Are you sure?' prompt to the delete buttons on the client app.
+-no, this isnt practical. If a pet is deleted and their owner no longer has any pets in the hotel, delete the owner too.
+|x| Add a 'Are you sure?' prompt to the delete buttons on the client app.
 - Add additional tests to test for proper validation errors.
 - Deploy to Heroku using the dotnet buildpack (See cohort notes for more info).
 

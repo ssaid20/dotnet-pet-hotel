@@ -36,6 +36,8 @@ public class Pets
     [Required]
     public string Name { get; set; }
 
+    public string ImageUrl { get; set; }    
+
     [Required]
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public PetBreed PetBreed { get; set; }

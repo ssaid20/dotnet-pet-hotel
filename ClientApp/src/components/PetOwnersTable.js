@@ -152,6 +152,11 @@ class PetOwnersTable extends Component {
 
 
   deletePetOwner = async (id) => {
+     // Prompt the user for confirmation before deleting
+     const userConfirmed = window.confirm("Are you sure you want to delete this pet owner?");
+     if (!userConfirmed) {
+      return;
+  }
     // First, find the pet owner by id from the props
     const petOwner = this.props.petOwners.find(po => po.id === id);
     

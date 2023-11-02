@@ -272,6 +272,12 @@ class PetsTable extends Component {
   }
 
   delete = async (id) => {
+
+    const userConfirmed = window.confirm("Are you sure you want to delete this pet?");
+     if (!userConfirmed) {
+      return;
+  }
+
     try {
       await axios.delete(`api/pets/${id}`);
       this.fetchData();
