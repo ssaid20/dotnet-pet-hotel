@@ -21,8 +21,8 @@ class Home extends Component {
     return (
       <>
         <NavMenu />
-        <Container tag="main">
-          <h1>Welcome To The Pet Hotel!</h1>
+        <Container tag="main" className="expandingBackground">
+          <h1 className="fancyText">Welcome To The Pet Hotel!</h1>
           <p>At our Pet Hotel, we take care of your pet while you are away. </p>
           <PetsTable fetchPetOwners={this.fetchPetOwners} />
           <br />

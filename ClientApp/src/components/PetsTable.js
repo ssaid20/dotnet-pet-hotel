@@ -11,15 +11,14 @@ class PetsTable extends Component {
     loading: true,
     errors: [],
     successMessage: null,
-    newPet: {
+    newPet: {  //setting pet details for the new pet add
       name: "",
       petBreed: "",
       petColor: "",
       petOwnerId: "",
       imageUrl: "",
       editingPetId: null,
-  updatedPetDetails: {
-    
+  updatedPetDetails: { //setting our new pet details
     newName: "",
     newPetBreed: "",
     newPetColor: "",
@@ -28,25 +27,19 @@ class PetsTable extends Component {
   }
     },
   };
-  
+  //edit pet function
   startEditing = (pet) => {
     
     this.setState({
       editingPetId: pet.id,
-      updatedPetDetails: {
+      updatedPetDetails: { //setting default on update to original values
         newName: pet.name,
       newPetBreed: pet.petBreed,
       newPetColor: pet.petColor,
-      newPetOwnerId: pet.petOwner.id.toString(), // Assuming petOwner.id is the correct reference
+      newPetOwnerId: pet.petOwner.id.toString(),
       newImageUrl: pet.imageUrl
       }
-      
-    });
-    console.log('pet.petowner.id', pet.petOwner.id);
-    console.log("Pet Owner", pet.petOwner.id)
-    console.log('logging pet.id', pet.id);
-
-   
+    });   
   };
   
 
@@ -54,6 +47,7 @@ class PetsTable extends Component {
     this.fetchData();
   };
 
+  //displaying DB data
   renderTable = () => {
     return (
       <div className="table-responsive">
@@ -63,7 +57,7 @@ class PetsTable extends Component {
         >
           <thead>
             <tr>
-        <th>Picture</th>
+            <th>Picture</th>
             <th>Name</th>
               <th>Breed</th>
               <th>Color</th>
@@ -101,21 +95,21 @@ class PetsTable extends Component {
             onClick={() => this.checkOut(pet.id)}
             className="btn btn-sm btn-info ml-1 mr-1"
           >
-            check out
+            Check out
           </button>
         ) : (
           <button
             onClick={() => this.checkIn(pet.id)}
             className="btn btn-sm btn-info ml-1 mr-1"
           >
-            check in
+            Check in
           </button>
         )}
         <button
           onClick={() => this.delete(pet.id)}
           className="btn btn-sm btn-danger"
         >
-          del
+          Delete
         </button>
         <button
   onClick={() => this.startEditing(pet)}
@@ -139,7 +133,7 @@ class PetsTable extends Component {
       </div>
     );
   };
-
+ // function to add a new pet
   addPet = async () => {
     try {
       await axios.post("api/pets/", this.state.newPet);
@@ -168,7 +162,7 @@ class PetsTable extends Component {
     
   
   };
-
+ //renders error messages from backend
   renderMessages = () => {
     /*
          Look into the local state to see if we have any errors
@@ -205,7 +199,7 @@ class PetsTable extends Component {
 
     return null;
   };
-
+  // displaying new form to update pet info
   renderUpdateForm = (pet) => {
     console.log(pet.id);
     return (
@@ -410,7 +404,7 @@ class PetsTable extends Component {
       </>
     );
   }
-
+  // delete a pet
   delete = async (id) => {
 
     const userConfirmed = window.confirm("Are you sure you want to delete this pet?");
@@ -427,7 +421,7 @@ class PetsTable extends Component {
       this.setState({ errors: { error: [err.message] }, successMessage: null });
     }
   };
- 
+ // update pet info
 update = async () => {
   const { newName, newImageUrl, newPetBreed, newPetColor, newPetOwnerId } = this.state.updatedPetDetails;
 
@@ -452,7 +446,7 @@ update = async () => {
 };
 
   
-
+  //check in a pet in DB
   checkIn = async (id) => {
     try {
       await axios.put(`api/pets/${id}/checkin`);
@@ -466,7 +460,7 @@ update = async () => {
       this.setState({ errors: { error: [err.message] }, successMessage: null });
     }
   };
-
+  // checkout a pet in DB
   checkOut = async (id) => {
     try {
       await axios.put(`api/pets/${id}/checkout`);
@@ -480,16 +474,12 @@ update = async () => {
       this.setState({ errors: { error: [err.message] }, successMessage: null });
     }
   };
-
+  // getting the pet data from DB
   fetchData = async () => {
     try {
       const response = await axios.get("api/pets/");
       this.props.dispatch({ type: "SET_PETS", payload: response.data });
       this.props.fetchPetOwners();
-
-      // stretch goal 1: grab a list of breeds from the backend
-      // stretch goal 2: grab a list of colors from the backend
-
       this.setState({ loading: false });
     } catch (err) {
       this.setState({ errors: { error: [err.message] }, successMessage: null });

@@ -2,6 +2,30 @@
 a {
   color: #0366d6;
 }
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slideInFromBottom {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.fancyText {
+  display: inline-block;
+  animation: 2s ease-out 0s 1 slideInFromLeft;
+}
 
 .btn:focus,
 .btn:active:focus,
@@ -24,7 +48,11 @@ a {
   flex-wrap: wrap;
   flex-direction: column;
   gap: 5px;
+  
 }
+
+
+
 code {
   color: #e01a76;
 }
@@ -49,10 +77,12 @@ code {
   width: 100%;
   background-color: #ffffff41;
   
+  animation: 2s ease-out 0s 1 slideInFromBottom;
 } 
  
 .table th {
   background-color: #d3d1d154;
+  
 }
 
 .table th,
@@ -95,7 +125,9 @@ code {
   border: 1px solid #ccc;
   border-radius: 4px;
   transition: border-color 0.3s ease;
+  animation: 2s ease-out 0s 1 slideInFromLeft;
 }
+
 @media (max-width: 768px) {
 
   .form-control, .btn {
