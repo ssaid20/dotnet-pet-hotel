@@ -13,7 +13,7 @@ class Home extends Component {
 
   
   fetchPetOwners = async () => {
-    const response = await axios.get("api/petOwners");
+    const response = await axios.get(`/api/petowners/?start=0&limit=10`);
     this.props.dispatch({ type: "SET_PETOWNERS", payload: response.data });
     console.log("%cHello world, %cand Hello Joe", "color: blue; font-size: 20px;", "color: violet; font-weight: bold; font-size: 8px");
     
