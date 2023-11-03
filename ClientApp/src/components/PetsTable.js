@@ -17,6 +17,7 @@ class PetsTable extends Component {
       petColor: "",
       petOwnerId: "",
       imageUrl: "",
+
       editingPetId: null,
   updatedPetDetails: { //setting our new pet details
     newName: "",
@@ -25,6 +26,7 @@ class PetsTable extends Component {
     newPetOwnerId: "",
     newImageUrl: "",
   }
+
     },
   };
   //edit pet function
@@ -57,6 +59,7 @@ class PetsTable extends Component {
         >
           <thead>
             <tr>
+
             <th>Picture</th>
             <th>Name</th>
               <th>Breed</th>
@@ -68,6 +71,7 @@ class PetsTable extends Component {
             </tr>
           </thead>
           <tbody>
+
           {this.props.pets.map((pet) => (
   <>
     <tr key={`pet-row-${pet.id}`}>
@@ -128,6 +132,7 @@ class PetsTable extends Component {
     ) : null}
   </>
 ))}
+
           </tbody>
         </table>
       </div>
