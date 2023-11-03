@@ -17,7 +17,14 @@ a {
     font-family: monaco;
   }
   
-
+.buttons-column {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 5px;
+}
 code {
   color: #e01a76;
 }
@@ -30,4 +37,69 @@ code {
 .btn-primary:hover{
   background-color: #5b99d8;
   color: black;
+}
+.table-responsive {
+  margin-top: 1rem;
+  border: 1px solid #f0c1c1;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  background-color: #ffffff41;
+  
+} 
+ 
+.table th {
+  background-color: #d3d1d154;
+}
+
+.table th,
+.table td {
+
+  padding: 12px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.table img {
+  size: auto;
+  height: 100%;
+  width: 100%;
+  max-width: fit-content;
+  max-height: 130px;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.btn {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 4px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-info {
+  background-color: #17a2b8;
+}
+.form-control {
+  width: auto;
+  display: inline-block;
+  padding: 8px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+}
+@media (max-width: 768px) {
+
+  .form-control, .btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
 }
