@@ -63,7 +63,7 @@ A recommended approach would be to start with PetOwners, since they're the simpl
 
 ### Stretch Goals
 
-- Have fun with the styling! Change things around, swap colors/fonts/textures, etc.
+|x| Have fun with the styling! Change things around, swap colors/fonts/textures, etc.
 - Create a new resource: `Transaction`. This transaction tracks the history of the hotel. A new transaction is created whenever a pet is checked in or checked out, a pet is created or deleted, or a pet owner is created or deleted, etc. It could be a simple timestamp and string of what happenens.
   - Create the model
   - Add the model to the ApplicationContext

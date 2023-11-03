@@ -35,8 +35,7 @@ public class Pets
 
     [Required]
     public string Name { get; set; }
-
-    public string ImageUrl { get; set; }    
+   
 
     [Required]
     public string ImageUrl { get; set; }
