@@ -12,8 +12,35 @@ class PetOwnersTable extends Component {
     newPetOwner: {
       name: "",
       email: "",
+      editingPetOwnerId: null,
+      updatedPetOwnerDetails: {
+        newName: "",
+        newEmail: "",
+      },
     },
   };
+
+  //edit pet function
+  startEditingPetOwner = (petOwner) => {
+    this.setState({
+      editingPetOwnerId: petOwner.id,
+      updatedPetOwnerDetails: {
+        newName: petOwner.name,
+        newEmail: petOwner.email,
+      },
+    });
+  };
+  
+  // startEditing = (petOwner) => {
+    
+  //   this.setState({
+  //     editingPetOwnerId: petOwner.id,
+  //     updatedPetDetails: { //setting default on update to original values
+  //       newName: petOwner.name,
+  //     newEmail: petOwner.email
+  //     }
+  //   });   
+  // };
 
   componentDidMount = async () => {
     await this.props.fetchPetOwners();
@@ -55,6 +82,7 @@ class PetOwnersTable extends Component {
       
       <div className="table-responsive">
         <ToastContainer />
+        
         <table
           className="table table-striped table-bordered table-hover"
           aria-labelledby="tabelLabel"
@@ -77,27 +105,82 @@ class PetOwnersTable extends Component {
               </tr>
             )}
             {this.props.petOwners.map((petOwner) => (
+              <>
               <tr key={`petOwner-row-${petOwner.id}`}>
                 <td>{petOwner.id}</td>
                 <td>{petOwner.name}</td>
                 <td>{petOwner.email}</td>
                 <td>{petOwner.petCount}</td>
                 <td>
+                  
                   <button
                     onClick={() => this.deletePetOwner(petOwner.id)}
                     className="btn btn-sm btn-danger"
                   >
                     Delete
                   </button>
+                  <button
+                    onClick={() => this.startEditingPetOwner(petOwner)}
+                    className="btn btn-sm btn-warning ml-1 mr-1"
+                  >
+                  Update
+                </button>
                 </td>
               </tr>
-            ))}
+                
+                {this.state.editingPetOwnerId === petOwner.id ? (
+                <tr>
+                  <td colSpan="5">
+                    {this.renderUpdatePetOwnerForm(petOwner)}
+                  </td>
+                </tr>
+              ) : null}
+</>
+     ))}          
+              
+
+            
           </tbody>
         </table>
       </div>
     );
   };
 
+  renderUpdatePetOwnerForm = (petOwner) => {
+    return (
+      <div>
+        <input
+          placeholder="Pet Owner Name"
+          value={this.state.updatedPetOwnerDetails.newName}
+          onChange={(event) =>
+            this.setState({
+              updatedPetOwnerDetails: {
+                ...this.state.updatedPetOwnerDetails,
+                newName: event.target.value,
+              },
+            })
+          }
+        />
+        <input
+          placeholder="Email Address"
+          value={this.state.updatedPetOwnerDetails.newEmail}
+          onChange={(event) =>
+            this.setState({
+              updatedPetOwnerDetails: {
+                ...this.state.updatedPetOwnerDetails,
+                newEmail: event.target.value,
+              },
+            })
+          }
+        />
+        <button onClick={this.updatePetOwner}>Save Changes</button>
+        <button onClick={() => this.setState({ editingPetOwnerId: null })}>
+          Cancel
+        </button>
+      </div>
+    );
+  };
+  
   render() {
     let contents = this.state.loading ? (
       <p>
@@ -175,7 +258,24 @@ class PetOwnersTable extends Component {
     }
 };
 
+//update owner
+updatePetOwner = async () => {
+  const { newName, newEmail } = this.state.updatedPetOwnerDetails;
 
+  try {
+    const updatedPetOwner = {
+      name: newName,
+      email: newEmail,
+    };
+
+    await axios.put(`api/petOwners/${this.state.editingPetOwnerId}`, updatedPetOwner);
+    this.props.fetchPetOwners();
+    toast.success("Successfully Updated Pet Owner!");
+    this.setState({ editingPetOwnerId: null, updatedPetOwnerDetails: {} }); // Reset editing state
+  } catch (err) {
+    toast.error("Update Failed: " + err.message);
+  }
+};
 
 
   submitPetOwner = async () => {

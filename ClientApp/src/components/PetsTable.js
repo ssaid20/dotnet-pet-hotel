@@ -17,7 +17,6 @@ class PetsTable extends Component {
       petColor: "",
       petOwnerId: "",
       imageUrl: "",
-
       editingPetId: null,
   updatedPetDetails: { //setting our new pet details
     newName: "",
