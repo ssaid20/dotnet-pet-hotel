@@ -34,9 +34,11 @@ class PetsTable extends Component {
     this.setState({
       editingPetId: pet.id,
       updatedPetDetails: {
-        ...pet,
-        petOwnerId: pet.petOwner.id.toString() // Convert to string for the dropdown
-        
+        newName: pet.name,
+      newPetBreed: pet.petBreed,
+      newPetColor: pet.petColor,
+      newPetOwnerId: pet.petOwner.id.toString(), // Assuming petOwner.id is the correct reference
+      newImageUrl: pet.imageUrl
       }
       
     });
@@ -152,20 +154,14 @@ class PetsTable extends Component {
       
       this.fetchData();
       toast.success("Successfully added pet!");
-      // this.setState({
-      //   errors: [],
-      //   successMessage: "Successfully added pet!",
-      // });
+ 
     } catch (err) {
       console.log(err);
         if (err.response.status === 400) {
          //validation errors
          
          toast.error(err.message);
-        // this.setState({
-        //   errors: err.response.data.errors,
-        //  successMessage: null,
-        // });
+    
         };
         
       }
@@ -426,54 +422,12 @@ class PetsTable extends Component {
       await axios.delete(`api/pets/${id}`);
       this.fetchData();
       toast.success("Successfully Deleted Pet!");
-      // this.setState({
-      //   errors: [],
-      //   successMessage: `Successfully removed pet`,
-      // });
+
     } catch (err) {
       this.setState({ errors: { error: [err.message] }, successMessage: null });
     }
   };
-  //old update
-  // update = async (id) => {
-  //   try {
-  //     await axios.put(`api/pets/${id}`);
-  //     this.fetchData();
-  //     toast.success("Successfully Updated Pet!")
-  //   } catch (err) {
-  //     this.setState({ errors: {error: [err.message] }, successMessage: null});
-  //   }
-  // }
-//previous update
-  // update = async () => {
-  //   try {
-  //     await axios.put(`api/pets/${this.state.editingPetId}`, this.state.updatedPetDetails);
-  //     this.fetchData();
-  //     toast.success("Successfully Updated Pet!");
-  //     this.setState({ editingPetId: null, updatedPetDetails: {} }); // Reset editing
-  //   } catch (err) {
-  //     this.setState({ errors: { error: [err.message] }, successMessage: null });
-  //   }
-  // };
-
-//   update = async () => {
-//     try {
-//       await axios.put(`api/pets/${this.state.editingPetId}`, {
-//         id: this.state.editingPetId,
-//         name: this.state.updatedPetDetails.newName,
-//         imageUrl: this.state.updatedPetDetails.newImageUrl,
-//         petBreed: this.state.updatedPetDetails.newPetBreed,
-//         petColor: this.state.updatedPetDetails.newPetColor,
-//         petOwnerid: this.state.updatedPetDetails.newPetOwnerId
-//       });
-
-//       this.fetchData();
-//       toast.success("Successfully Updated Pet!");
-//       this.setState({ editingPetId: null, updatedPetDetails: {} });
-//     } catch (err) {
-//       this.setState({ errors: { error: [err.message] }, successMessage: null });
-//     }
-// };
+ 
 update = async () => {
   const { newName, newImageUrl, newPetBreed, newPetColor, newPetOwnerId } = this.state.updatedPetDetails;
 
