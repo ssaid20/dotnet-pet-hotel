@@ -14,6 +14,18 @@ Please Note: If you get a 'Request failed with status code 431' error, this is l
 It is likely caused because your controllers do not have any valid routes set up yet.
 
 ## Screenshots
+### Finished project
+The pets are displayed on a table
+![Pet Hotel Table](Static/Images/PetsTableUpdated.png)
+
+The pet owners table
+![Pet Owners Table](Static/Images/OwnersTable.png)
+
+The pets table can be edited
+![Pets Table Update](Static/Images/Edit.png)
+
+Toast alerts alter the user of successes and failures
+![Pet Hotel Toast](Static/Images/WithToast.png)
 
 ### Pet Hotel UI (working with base goals met)
 
@@ -61,7 +73,7 @@ A recommended approach would be to start with PetOwners, since they're the simpl
   - Show all recent transactions in the react app.
 |x| Add a profile image to your pets (via internet URL) or a drop-down of available URLs. You'll need to add the field and migration for the new field. Consider Updating the tests to check that images make it!
 - Use the model validations returned from the server to highlight which fields have the validation error. Hint: The error coming back will often contain the field name, which will match the name of the element on the form. See sourdough bakery for examples (the React App already has plumbing for default validation message format).
-- Add the ability to edit pet names
+|x| Add the ability to edit pet names. We went further, can edit all pet details
 - Add the ability to edit pet owners' name, email address
 - Add pagination to one (or all) of the resources. You can do this with optional parameters: `/api/petowners/?start=0&limit=10`, next page: `/api/petowners/?start=10&limit=10` etc. `Transaction` would benefit greatly from this.
 - Move alerts up to global redux state and share alert state between the tables

@@ -136,7 +136,8 @@ public IActionResult UpdatePet(int PetId, [FromBody] Pets PetUpdate)
     pet.ImageUrl = PetUpdate.ImageUrl;
 
     // The pet is already tracked, so just mark it as modified
-    _c.Entry(pet).State = EntityState.Modified;
+    // _c.Entry(pet).State = EntityState.Modified;
+    _c.Pets.Update(pet);
     _c.SaveChanges();
     return Ok(pet);
 }
