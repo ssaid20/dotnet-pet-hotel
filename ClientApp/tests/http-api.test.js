@@ -63,6 +63,7 @@ test("Create a new pet via HTTP POST", async () => {
   // nothing to do yet
   const newPet = {
     name: "Fido 1",
+    imageUrl: "https://yourdost-blog-images.s3-ap-southeast-1.amazonaws.com/wp-content/uploads/2016/01/03165939/Dogs.jpg",
     petBreed: "Retriever",
     petColor: "Golden",
     petOwnerId: petOwner.id,
@@ -77,6 +78,8 @@ test("Create a new pet via HTTP POST", async () => {
   expect(response.status).toBe(201);
   expect(typeof response.data).toBe(typeof {});
   expect(typeof response.data.id).toBe(typeof 0);
+
+
   expect(typeof response.data.petOwner.petCount).toBe(typeof 1);
   expect(response.data.petOwner.petCount).toBe(1);
   expect(response.data.checkedInAt).toBe("0001-01-01T00:00:00");
@@ -85,6 +88,7 @@ test("Create a new pet via HTTP POST", async () => {
 
 test("Update the pet via HTTP PUT", async () => {
   const newName = "Fido II";
+  const newImageUrl = "http://example.com/fido2.jpg";
   const newPet = { ...pet, name: newName, color: "Black" };
   const response = await axios.put(`${SERVER_URL}/api/pets/${pet.id}`, newPet);
   expect(response.status).toBe(200);

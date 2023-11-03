@@ -14,6 +14,18 @@ Please Note: If you get a 'Request failed with status code 431' error, this is l
 It is likely caused because your controllers do not have any valid routes set up yet.
 
 ## Screenshots
+### Finished project
+The pets are displayed on a table
+![Pet Hotel Table](Static/Images/PetsTableUpdated.png)
+
+The pet owners table
+![Pet Owners Table](Static/Images/OwnersTable.png)
+
+The pets table can be edited
+![Pets Table Update](Static/Images/Edit.png)
+
+Toast alerts alter the user of successes and failures
+![Pet Hotel Toast](Static/Images/WithToast.png)
 
 ### Pet Hotel UI (working with base goals met)
 
@@ -51,7 +63,7 @@ A recommended approach would be to start with PetOwners, since they're the simpl
 
 ### Stretch Goals
 
-- Have fun with the styling! Change things around, swap colors/fonts/textures, etc.
+|x| Have fun with the styling! Change things around, swap colors/fonts/textures, etc.
 - Create a new resource: `Transaction`. This transaction tracks the history of the hotel. A new transaction is created whenever a pet is checked in or checked out, a pet is created or deleted, or a pet owner is created or deleted, etc. It could be a simple timestamp and string of what happenens.
   - Create the model
   - Add the model to the ApplicationContext
@@ -59,16 +71,16 @@ A recommended approach would be to start with PetOwners, since they're the simpl
   - Create the controller
   - Create the relevant jest tests
   - Show all recent transactions in the react app.
-- Add a profile image to your pets (via internet URL) or a drop-down of available URLs. You'll need to add the field and migration for the new field. Consider Updating the tests to check that images make it!
+|x| Add a profile image to your pets (via internet URL) or a drop-down of available URLs. You'll need to add the field and migration for the new field. Consider Updating the tests to check that images make it!
 - Use the model validations returned from the server to highlight which fields have the validation error. Hint: The error coming back will often contain the field name, which will match the name of the element on the form. See sourdough bakery for examples (the React App already has plumbing for default validation message format).
-- Add the ability to edit pet names
-- Add the ability to edit pet owners' name, email address
+|x| Add the ability to edit pet names. We went further, can edit all pet details
+|x| Add the ability to edit pet owners' name, email address
 - Add pagination to one (or all) of the resources. You can do this with optional parameters: `/api/petowners/?start=0&limit=10`, next page: `/api/petowners/?start=10&limit=10` etc. `Transaction` would benefit greatly from this.
 - Move alerts up to global redux state and share alert state between the tables
-- Move alerts to be 'toasts': they show up in the corner and auto-dismiss themselves after 5 seconds.
-- Prevent the PetOwner from being deleted if they have any pets that are checked in.
-- If a pet is deleted and their owner no longer has any pets in the hotel, delete the owner too.
-- Add a 'Are you sure?' prompt to the delete buttons on the client app.
+|x| Move alerts to be 'toasts': they show up in the corner and auto-dismiss themselves after 5 seconds.
+|x| Prevent the PetOwner from being deleted if they have any pets that are checked in.
+-no, this isnt practical. If a pet is deleted and their owner no longer has any pets in the hotel, delete the owner too.
+|x| Add a 'Are you sure?' prompt to the delete buttons on the client app.
 - Add additional tests to test for proper validation errors.
 - Deploy to Heroku using the dotnet buildpack (See cohort notes for more info).
 

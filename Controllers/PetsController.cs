@@ -106,14 +106,41 @@ public class PetsController : ControllerBase
         return Ok(pet);
     }
 
-    [HttpPut("{PetId}")]
-    public IActionResult UpdatePet(int PetId, [FromBody] Pets Pet)
-    {
-        if (!_c.Pets.Any(p => p.Id == PetId)) return NotFound();
-        _c.Update(Pet);
-        _c.SaveChanges();
-        return Ok(_c.Pets.Include(p => p.PetOwner).SingleOrDefault(p => p.Id == PetId));
-    }
+    // [HttpPut("{PetId}")]
+    // public IActionResult UpdatePet(int PetId, [FromBody] Pets Pet)
+    
+    
+    // {
+    //     if (!_c.Pets.Any(p => p.Id == PetId)) return NotFound();
+    // //      if (Pet.Id != PetId)
+    // // {
+    // //     // The ID in the path doesn't match the ID in the body
+    // //     return BadRequest("The ID in the URL does not match the ID of the pet.");
+    // // }
+
+    //     _c.Update(Pet);
+    //     _c.SaveChanges();
+    //     return Ok(_c.Pets.Include(p => p.PetOwner).SingleOrDefault(p => p.Id == PetId));
+    // }
+[HttpPut("{PetId}")]
+public IActionResult UpdatePet(int PetId, [FromBody] Pets PetUpdate)
+{
+    var pet = _c.Pets.Include(p => p.PetOwner).SingleOrDefault(p => p.Id == PetId);
+    if (pet == null) return NotFound();
+
+    // Map the updated fields to the pet entity
+    pet.Name = PetUpdate.Name;
+    pet.PetBreed = PetUpdate.PetBreed;
+    pet.PetColor = PetUpdate.PetColor;
+    pet.PetOwnerid = PetUpdate.PetOwnerid; // Ensure this is the correct property name
+    pet.ImageUrl = PetUpdate.ImageUrl;
+
+    // The pet is already tracked, so just mark it as modified
+    // _c.Entry(pet).State = EntityState.Modified;
+    _c.Pets.Update(pet);
+    _c.SaveChanges();
+    return Ok(pet);
+}
 
     
 }

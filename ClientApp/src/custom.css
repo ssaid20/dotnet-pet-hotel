@@ -2,6 +2,30 @@
 a {
   color: #0366d6;
 }
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slideInFromBottom {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.fancyText {
+  display: inline-block;
+  animation: 2s ease-out 0s 1 slideInFromLeft;
+}
 
 .btn:focus,
 .btn:active:focus,
@@ -10,9 +34,25 @@ a {
 .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
-body {
-  background-color: #788a9d;
+
+  /* background-color: rgb(186, 35, 133); */
+  body {
+    background-image: linear-gradient(to right, rgb(186, 35, 133), rgb(115, 85, 133), rgb(35, 133, 186));
+    font-family: monaco;
+  }
+  
+.buttons-column {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 5px;
+  
 }
+
+
+
 code {
   color: #e01a76;
 }
@@ -21,4 +61,77 @@ code {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
+}
+.btn-primary:hover{
+  background-color: #5b99d8;
+  color: black;
+}
+.table-responsive {
+  margin-top: 1rem;
+  border: 1px solid #f0c1c1;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  background-color: #ffffff41;
+  
+  animation: 2s ease-out 0s 1 slideInFromBottom;
+} 
+ 
+.table th {
+  background-color: #d3d1d154;
+  
+}
+
+.table th,
+.table td {
+
+  padding: 12px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.table img {
+  size: auto;
+  height: 100%;
+  width: 100%;
+  max-width: fit-content;
+  max-height: 130px;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.btn {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 4px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-info {
+  background-color: #17a2b8;
+}
+.form-control {
+  width: auto;
+  display: inline-block;
+  padding: 8px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+  animation: 2s ease-out 0s 1 slideInFromLeft;
+}
+
+@media (max-width: 768px) {
+
+  .form-control, .btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
 }
