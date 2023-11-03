@@ -50,21 +50,43 @@ namespace pet_hotel.Controllers
             return NoContent();
         }
         
-        [HttpPut("{OwnerId}")]
-        public IActionResult UpdatePetOwner(int OwnerId, [FromBody] PetOwner OwnerUpdate)
+        [HttpPut("{PetOwnerId}")]
+        public IActionResult UpdatePetOwner(int PetOwnerId, [FromBody] PetOwner PetOwnerUpdate)
         {
-            var owner = _c.PetOwners.Include(o => o.Pets).SingleOrDefault(o => o.Id == OwnerId);
-            if (owner == null) return NotFound();
+             var owner = _c.PetOwners.Find(PetOwnerId);
+             if (owner == null) return NotFound();
 
-            owner.Name = OwnerUpdate.Name;
-            owner.Email = OwnerUpdate.Email;
+            owner.Name = PetOwnerUpdate.Name;
+            owner.Email = PetOwnerUpdate.Email;
 
-
+        
+            // _c.Entry(owner).State = EntityState.Modified;
             _c.PetOwners.Update(owner);
             _c.SaveChanges();
             return Ok(owner);
         }
-    }
+
+// public IActionResult UpdatePet(int PetId, [FromBody] Pets PetUpdate)
+// {
+//     var pet = _c.Pets.Include(p => p.PetOwner).SingleOrDefault(p => p.Id == PetId);
+//     if (pet == null) return NotFound();
+
+//     // Map the updated fields to the pet entity
+//     pet.Name = PetUpdate.Name;
+//     pet.PetBreed = PetUpdate.PetBreed;
+//     pet.PetColor = PetUpdate.PetColor;
+//     pet.PetOwnerid = PetUpdate.PetOwnerid; // Ensure this is the correct property name
+//     pet.ImageUrl = PetUpdate.ImageUrl;
+
+//     // The pet is already tracked, so just mark it as modified
+//     // _c.Entry(pet).State = EntityState.Modified;
+//     _c.Pets.Update(pet);
+//     _c.SaveChanges();
+//     return Ok(pet);
+}
+
+
+    
 
 
 

@@ -74,7 +74,7 @@ A recommended approach would be to start with PetOwners, since they're the simpl
 |x| Add a profile image to your pets (via internet URL) or a drop-down of available URLs. You'll need to add the field and migration for the new field. Consider Updating the tests to check that images make it!
 - Use the model validations returned from the server to highlight which fields have the validation error. Hint: The error coming back will often contain the field name, which will match the name of the element on the form. See sourdough bakery for examples (the React App already has plumbing for default validation message format).
 |x| Add the ability to edit pet names. We went further, can edit all pet details
-- Add the ability to edit pet owners' name, email address
+|x| Add the ability to edit pet owners' name, email address
 - Add pagination to one (or all) of the resources. You can do this with optional parameters: `/api/petowners/?start=0&limit=10`, next page: `/api/petowners/?start=10&limit=10` etc. `Transaction` would benefit greatly from this.
 - Move alerts up to global redux state and share alert state between the tables
 |x| Move alerts to be 'toasts': they show up in the corner and auto-dismiss themselves after 5 seconds.
